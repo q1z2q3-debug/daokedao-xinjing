@@ -23,3 +23,7 @@
 - `道可道-心经通释-1.0.0.apk`，2.37 MB，零权限、断网可用；Noto Serif CJK 子集化 1,662 字，两个字重内置。
 - Zenodo 存档：DOI 10.5281/zenodo.24210811。
 - targetSdk 34，minSdk 21；签名与《易传》《道德经》同一密钥，v1/v2/v3 均通过校验。
+
+## 英文十篇（2026-11-14）
+- 分释篇一至篇十一写成英文短论十篇（末两篇合为第十篇），dev.to 首发，账号 q1z2q3debug。
+- canonical 指本仓 `book.html#分释篇N` 锚点；清单见 `data/en-posts.json`，首页「英文 · 十篇」栏直接列出。

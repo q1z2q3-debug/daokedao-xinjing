@@ -57,3 +57,6 @@ https://doi.org/10.5281/zenodo.24210811
 ## 六、许可
 
 正文与图版采用 [CC BY-NC-SA 4.0](LICENSE)：署名、非商业、相同方式共享。
+
+## 英文稿
+分释十一篇写成十篇英文短论（末两篇合为收束篇），清单见 `data/en-posts.json`，首页有「英文 · 十篇」入口。canonical 指向 `book.html#分释篇N`。
