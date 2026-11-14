@@ -42,11 +42,13 @@
 
 - v1.0.0（2026-11-14）：书稿、封面、扉页、封套、阅读版、安卓包首发。
 
+存档 DOI：<https://doi.org/10.5281/zenodo.24210811>
+
 ## 五、引用
 
 ```
 润泽. 润泽说 道可道之心经通释. v1.0.0. 2026.
-https://github.com/q1z2q3-debug/daokedao-xinjing
+https://doi.org/10.5281/zenodo.24210811
 ```
 
 ## 六、许可
