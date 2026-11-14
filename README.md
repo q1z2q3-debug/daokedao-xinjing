@@ -42,6 +42,8 @@
 
 - v1.0.0（2026-11-14）：书稿、封面、扉页、封套、阅读版、安卓包首发。
 
+系列总站：<https://q1z2q3-debug.github.io/runze-daokedao/>
+
 存档 DOI：<https://doi.org/10.5281/zenodo.24210811>
 
 ## 五、引用
