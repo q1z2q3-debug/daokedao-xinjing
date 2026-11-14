@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>心经通释 封套</title>
+<style>
+  html,body{margin:0;padding:0;background:#E7DECC;}
+  .wrap{display:flex;width:2570px;height:1754px;background:#F6F1E4;
+    font-family:'Noto Serif CJK SC','Noto Serif SC','Songti SC',serif;color:#23201C;}
+  .panel{position:relative;width:1240px;height:1754px;overflow:hidden;
+    background:#F6F1E4;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(120,96,64,.018) 0 1px, transparent 1px 7px);
+  }
+  .panel::after{content:"";position:absolute;inset:0;pointer-events:none;
+    box-shadow:inset 0 0 140px rgba(120,96,64,.09);}
+  .rule{position:absolute;height:1px;background:#C9B39A;}
+
+  /* ---------- 封面 ---------- */
+  .cover::before{content:"";position:absolute;left:0;top:0;bottom:0;width:26px;
+    background:linear-gradient(90deg,rgba(90,70,45,.14),rgba(90,70,45,0));}
+  .eyebrow{position:absolute;top:120px;left:0;right:0;text-align:center;
+    font-size:16px;letter-spacing:.44em;color:#8A6F52;text-indent:.44em;}
+  .eyebrow-rule{top:168px;left:470px;width:300px;opacity:.8;}
+  .title-col{position:absolute;right:142px;top:286px;width:176px;
+    display:flex;flex-direction:column;align-items:center;}
+  .title-col span{font-size:140px;line-height:1.12;font-weight:600;}
+  .enso{position:absolute;left:64px;top:366px;width:540px;height:540px;}
+  .enso-text{position:absolute;left:72px;top:360px;width:540px;height:540px;
+    display:flex;align-items:center;justify-content:center;}
+  .vtext{writing-mode:vertical-rl;font-size:36px;letter-spacing:.32em;color:#6A5A47;
+    line-height:1.95;text-indent:.32em;}
+  .tagline{position:absolute;left:112px;top:1012px;font-size:15px;letter-spacing:.22em;color:#8A7A67;}
+  .tagline b{font-weight:500;color:#6E5D4A;}
+  .seal{position:absolute;right:146px;top:986px;width:88px;height:88px;background:#A3402C;
+    color:#FBF3E6;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;
+    font-size:29px;line-height:1.12;opacity:.9;}
+  .seal span{width:50%;text-align:center;}
+  .foot-rule{top:1242px;left:112px;width:1016px;opacity:.55;}
+  .author{position:absolute;left:112px;top:1300px;font-size:27px;letter-spacing:.10em;color:#2A2622;}
+  .meta{position:absolute;left:112px;top:1362px;font-size:14px;letter-spacing:.22em;color:#94836F;}
+  .imprint{position:absolute;right:112px;top:1298px;text-align:right;
+    font-size:12.5px;letter-spacing:.20em;color:#9C8A76;line-height:2.2;}
+  .bottom-rule{top:1640px;left:112px;width:1016px;opacity:.45;}
+  .bottom-line{position:absolute;left:0;right:0;top:1678px;text-align:center;
+    font-size:12px;letter-spacing:.32em;color:#A2917C;text-indent:.32em;}
+
+  /* ---------- 书脊 ---------- */
+  .spine{width:90px;background:#EFE5D2;
+    background-image:linear-gradient(90deg,rgba(120,96,64,.14),transparent 30%,transparent 72%,rgba(120,96,64,.14));
+    display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+    padding:170px 0 180px;box-sizing:border-box;position:relative;}
+  .spine .v{writing-mode:vertical-rl;font-size:21px;letter-spacing:.30em;color:#3A332B;}
+  .spine .v.small{font-size:12.5px;letter-spacing:.26em;color:#8A7A67;}
+
+  /* ---------- 封底 ---------- */
+  .back .top-rule{top:150px;left:112px;width:1016px;opacity:.5;}
+  .back .blurb{position:absolute;top:344px;left:150px;width:940px;
+    font-size:19px;line-height:2.35;letter-spacing:.06em;color:#3B332B;text-align:justify;}
+  .back .blurb .lead{display:block;font-size:15px;letter-spacing:.28em;color:#8A6F52;margin-bottom:26px;}
+  .back .three{position:absolute;top:806px;left:150px;width:940px;text-align:center;
+    font-size:16px;letter-spacing:.16em;color:#5E5142;}
+  .back .three i{font-style:normal;color:#A3402C;}
+  .back .mid-rule{top:872px;left:440px;width:360px;opacity:.5;}
+  .back .quote{position:absolute;top:912px;left:150px;width:940px;text-align:center;
+    font-size:16px;line-height:2.2;letter-spacing:.10em;color:#6B5B4A;}
+  .back .quote .src{display:block;font-size:11.5px;letter-spacing:.26em;color:#9C8A76;margin-top:12px;}
+  .back .who{position:absolute;top:1052px;left:150px;width:940px;
+    font-size:13.5px;line-height:2.15;letter-spacing:.04em;color:#5E5142;text-align:justify;}
+  .back .who .lead{display:block;font-size:11.5px;letter-spacing:.28em;color:#9C8A76;margin-bottom:14px;}
+  .back .foot-rule{top:1336px;left:112px;width:1016px;opacity:.45;}
+  .back .mark{position:absolute;top:1382px;left:112px;font-size:13px;letter-spacing:.22em;color:#94836F;}
+  .back .mark2{position:absolute;top:1424px;left:112px;font-size:11.5px;letter-spacing:.18em;color:#A2917C;}
+  .back .seal{position:absolute;right:132px;top:1370px;width:80px;height:80px;background:#A3402C;
+    color:#FBF3E6;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;
+    font-size:26px;line-height:1.12;opacity:.88;}
+  .back .seal span{width:50%;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 封底 -->
+  <div class="panel back">
+    <div class="rule top-rule"></div>
+    <div class="blurb">
+      <span class="lead">内 容 提 要</span>
+      二百六十字《心经》，为般若纲宗、心性总诀、万古安心之经。千百年来，注解浩繁，或流于玄虚，或困于字面，或杂于宗教附会，致使至简至通透的生命真理常被迷雾遮蔽。<br><br>
+      本书以「佛说A—即非A—是名A」为标尺，字源溯源、逐句拆解、跨典互证，以易、道、佛三参为一框架，剥离迷信外壳，还原般若本真，使之成为现代人破执、止耗、定心、升维的心性底层系统。
+    </div>
+
+    <div class="three">佛说A　<i>·</i>　即非A　<i>·</i>　是名A</div>
+    <div class="rule mid-rule"></div>
+
+    <div class="quote">
+      照见五蕴，是认知升维；远离颠倒，是生命自愈；无怖无畏，是心性圆满。
+      <span class="src">《跋》</span>
+    </div>
+
+    <div class="who">
+      <span class="lead">作 者 简 介</span>
+      润泽，独立学人。「润泽说」系列以《周易》《老》《庄》《心经》为经，立三才五蕴太极空杯之模型、般若「说—非—名」之范式，志在把东方心性之学讲成可验证、可日用的一套。
+    </div>
+
+    <div class="rule foot-rule"></div>
+    <div class="mark">润泽说 · 道可道　第二部《觉醒》</div>
+    <div class="mark2">稿本 · 岁次丙午 · 冬月　│　心经通释</div>
+    <div class="seal"><span>润</span><span>泽</span></div>
+  </div>
+
+  <!-- 书脊 -->
+  <div class="spine">
+    <div class="v small">润泽说 · 道可道</div>
+    <div class="v">心 经 通 释</div>
+    <div class="v small">润 泽</div>
+  </div>
+
+  <!-- 封面 -->
+  <div class="panel cover">
+    <div class="eyebrow">润 泽 说 · 道 可 道 · 第 二 部 觉 醒</div>
+    <div class="rule eyebrow-rule"></div>
+
+    <div class="title-col">
+      <span>心</span><span>经</span><span>通</span><span>释</span>
+    </div>
+
+    <svg class="enso" viewBox="0 0 540 540" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="brush" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stop-color="#7E4C36" stop-opacity=".52"/>
+          <stop offset=".35" stop-color="#8E5B44" stop-opacity=".34"/>
+          <stop offset=".72" stop-color="#A5735A" stop-opacity=".22"/>
+          <stop offset="1" stop-color="#B58C72" stop-opacity=".14"/>
+        </linearGradient>
+      </defs>
+      <circle cx="270" cy="270" r="202" fill="none" stroke="url(#brush)" stroke-width="15"
+              stroke-linecap="round" stroke-dasharray="1180 90" transform="rotate(-52 270 270)"/>
+    </svg>
+    <div class="enso-text"><div class="vtext">照见五蕴皆空</div></div>
+
+    <div class="tagline"><b>二百六十字</b>　·　一部心性底层系统</div>
+    <div class="seal"><span>润</span><span>泽</span></div>
+
+    <div class="rule foot-rule"></div>
+    <div class="author">润泽　著</div>
+    <div class="meta">稿本 · 岁次丙午 · 冬月</div>
+    <div class="imprint">润泽说 · 道可道<br>第二部《觉醒》</div>
+    <div class="rule bottom-rule"></div>
+    <div class="bottom-line">佛说般若波罗蜜　即非般若波罗蜜　是名般若波罗蜜</div>
+  </div>
+
+</div>
+</body>
+</html>

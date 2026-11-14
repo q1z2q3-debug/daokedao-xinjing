@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>心经通释 封面</title>
+<style>
+  @page { size: 1240px 1754px; margin: 0; }
+  html,body{margin:0;padding:0;background:#EFE7D8;}
+  .cover{
+    position:relative;width:1240px;height:1754px;box-sizing:border-box;
+    background:#F6F1E4;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(120,96,64,.018) 0 1px, transparent 1px 7px),
+      radial-gradient(120% 90% at 78% 10%, rgba(255,255,255,.55), transparent 62%),
+      radial-gradient(90% 70% at 10% 94%, rgba(160,132,96,.10), transparent 66%);
+    font-family:'Noto Serif CJK SC','Noto Serif SC','Songti SC',serif;
+    color:#23201C;overflow:hidden;
+  }
+  .cover::before{content:"";position:absolute;left:0;top:0;bottom:0;width:26px;
+    background:linear-gradient(90deg,rgba(90,70,45,.14),rgba(90,70,45,0));}
+  .cover::after{content:"";position:absolute;inset:0;pointer-events:none;
+    box-shadow:inset 0 0 140px rgba(120,96,64,.09);}
+
+  .rule{position:absolute;height:1px;background:#C9B39A;}
+
+  .eyebrow{position:absolute;top:120px;left:0;right:0;text-align:center;
+    font-size:16px;letter-spacing:.44em;color:#8A6F52;text-indent:.44em;}
+  .eyebrow-rule{top:168px;left:470px;width:300px;opacity:.8;}
+
+  .title-col{position:absolute;right:142px;top:286px;width:176px;
+    display:flex;flex-direction:column;align-items:center;}
+  .title-col span{font-size:140px;line-height:1.12;font-weight:600;}
+
+  .enso{position:absolute;left:64px;top:366px;width:540px;height:540px;}
+  .enso-text{position:absolute;left:72px;top:360px;width:540px;height:540px;
+    display:flex;align-items:center;justify-content:center;}
+  .vtext{writing-mode:vertical-rl;font-size:36px;letter-spacing:.32em;color:#6A5A47;
+    line-height:1.95;text-indent:.32em;}
+
+  .tagline{position:absolute;left:112px;top:1012px;font-size:15px;letter-spacing:.22em;color:#8A7A67;}
+  .tagline b{font-weight:500;color:#6E5D4A;}
+
+  .seal{position:absolute;right:146px;top:986px;width:88px;height:88px;background:#A3402C;
+    color:#FBF3E6;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;
+    font-size:29px;line-height:1.12;opacity:.9;}
+  .seal span{width:50%;text-align:center;}
+
+  .foot-rule{top:1242px;left:112px;width:1016px;opacity:.55;}
+  .author{position:absolute;left:112px;top:1300px;font-size:27px;letter-spacing:.10em;color:#2A2622;}
+  .author em{font-style:normal;font-size:14px;letter-spacing:.3em;color:#9C8A76;margin-left:16px;}
+  .meta{position:absolute;left:112px;top:1362px;font-size:14px;letter-spacing:.22em;color:#94836F;}
+  .imprint{position:absolute;right:112px;top:1298px;text-align:right;
+    font-size:12.5px;letter-spacing:.20em;color:#9C8A76;line-height:2.2;}
+  .bottom-rule{top:1640px;left:112px;width:1016px;opacity:.45;}
+  .bottom-line{position:absolute;left:0;right:0;top:1678px;text-align:center;
+    font-size:12px;letter-spacing:.32em;color:#A2917C;text-indent:.32em;}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="eyebrow">润 泽 说 · 道 可 道 · 第 二 部 觉 醒</div>
+  <div class="rule eyebrow-rule"></div>
+
+  <div class="title-col">
+    <span>心</span><span>经</span><span>通</span><span>释</span>
+  </div>
+
+  <svg class="enso" viewBox="0 0 540 540" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="brush" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0" stop-color="#7E4C36" stop-opacity=".52"/>
+        <stop offset=".35" stop-color="#8E5B44" stop-opacity=".34"/>
+        <stop offset=".72" stop-color="#A5735A" stop-opacity=".22"/>
+        <stop offset="1" stop-color="#B58C72" stop-opacity=".14"/>
+      </linearGradient>
+    </defs>
+    <circle cx="270" cy="270" r="202" fill="none" stroke="url(#brush)" stroke-width="15"
+            stroke-linecap="round" stroke-dasharray="1180 90" transform="rotate(-52 270 270)"/>
+  </svg>
+  <div class="enso-text"><div class="vtext">照见五蕴皆空</div></div>
+
+  <div class="tagline"><b>二百六十字</b>　·　一部心性底层系统</div>
+
+  <div class="seal"><span>润</span><span>泽</span></div>
+
+  <div class="rule foot-rule"></div>
+  <div class="author">润泽　著</div>
+  <div class="meta">稿本 · 岁次丙午 · 冬月</div>
+  <div class="imprint">润泽说 · 道可道<br>第二部《觉醒》</div>
+  <div class="rule bottom-rule"></div>
+  <div class="bottom-line">佛说般若波罗蜜　即非般若波罗蜜　是名般若波罗蜜</div>
+</div>
+</body>
+</html>
