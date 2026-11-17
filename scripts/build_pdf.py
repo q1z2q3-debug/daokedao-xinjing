@@ -23,7 +23,8 @@ PRINT_CSS = """
   nav.toc{page-break-after:always;}
   h2{page-break-before:always;font-size:17pt;margin:0 0 12pt;padding-top:0;border-top:0;}
   h2:first-of-type{page-break-before:auto;}
-  h3{font-size:11pt;margin:14pt 0 6pt;}
+  h3{font-size:11pt;margin:14pt 0 6pt;page-break-after:avoid;break-after:avoid;}
+  figure{page-break-inside:avoid;break-inside:avoid;}
   p{font-size:10.2pt;line-height:1.75;margin:0 0 8pt;}
   li{font-size:10pt;line-height:1.7;}
   blockquote p,.ednote p{font-size:9.2pt;line-height:1.65;}
