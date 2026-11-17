@@ -31,7 +31,9 @@
 | [`packages/apk-1.0.0-xinjing/`](packages/apk-1.0.0-xinjing/) | **安卓离线包**。零权限、断网可用、字体内置 | 2.4 MB |
 | [`apk/`](apk/) | APK 构建链：资源准备、aapt2/javac/d8/apksigner 六步 | — |
 | [`figures/`](figures/) | 封面、扉页、封套源文件与四图成图 | — |
+| [`docs/models/`](docs/models/) | **五蕴模型（三维）**。杯器与管壁，可旋转、可调壁厚，单文件离线可开 | 各 630 KB |
 | [`docs/wuyun-pipe.html`](docs/wuyun-pipe.html) | **五蕴管壁 · 自照**。二十题、五档，看壁厚与孔径，不作诊断 | 670 KB |
+| [`skill/sancai-wuyun-3d/`](skill/sancai-wuyun-3d/) | **可复用插件**。模板＋构建脚本＋几何契约，`scripts/build.py` 可复现两只模型 | 670 KB |
 
 ## 三、在线读
 
@@ -39,11 +41,13 @@
 
 - `/` 首页：全书结构、产物入口、附录索引
 - `/book.html` 全书一页（1.8 MB，单文件自包含）
+- `/models/` 五蕴模型（三维）：杯器、管壁两只可旋转模型
 - `/wuyun-pipe.html` 五蕴管壁自照单页（670 KB，单文件自包含）
 
 ## 四、版本
 
 - v1.0.0（2026-11-14）：书稿、封面、扉页、封套、阅读版、安卓包首发。
+- v1.0.1（2026-11-17）：增设五蕴三维模型（杯器／管壁）与可复用插件 `skill/sancai-wuyun-3d/`。
 - v1.1.0（2026-11-18）：附录二增五蕴管壁补论（五至七节），原修学要点改为第八节；新增图四、自照单页与站点入口；重建阅读版与 PDF。
 
 系列总站：<https://q1z2q3-debug.github.io/runze-daokedao/>

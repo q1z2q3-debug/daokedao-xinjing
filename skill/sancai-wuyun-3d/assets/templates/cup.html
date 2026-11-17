@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>五蕴杯器 · 三维</title>
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23faf6ec'/><path d='M9 8h14l-2 14H11z' fill='none' stroke='%232b2925' stroke-width='1.6'/><ellipse cx='16' cy='8' rx='7' ry='2.4' fill='none' stroke='%232b2925' stroke-width='1.4'/></svg>">
+<style>
+  :root{
+    --paper:#F7F4EE;
+    --paper-2:#FCFAF6;
+    --ink:#25211D;
+    --ink-2:#3B352F;
+    --rule:#DCD5C8;
+    --se:#b78a55;   /* 色 */
+    --shou:#cf8d86; /* 受 */
+    --xiang:#dfc06b;/* 想 */
+    --xing:#93b79b; /* 行 */
+    --shi:#8ea8cc;  /* 识 */
+    --accent:#994433;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .navline{font-size:12.5px;letter-spacing:.12em;color:#7C6D5C;margin:0 0 16px}
+  .navline a{color:#994433;text-decoration:none;border-bottom:1px solid rgba(153,68,51,.35);padding-bottom:1px}
+  .navline .sep{margin:0 9px;color:#C4B7A2}
+  .shell{
+    max-width:1180px;margin:0 auto;padding:34px 28px 30px;
+  }
+  header{border-bottom:1px solid var(--rule);padding-bottom:18px;margin-bottom:22px}
+  .eyebrow{
+    display:inline-block;font-size:12px;letter-spacing:.22em;color:var(--accent);
+    border:1px solid #D8C6AE;border-radius:2px;padding:3px 8px;margin-bottom:12px;
+  }
+  h1{
+    font-family:"Noto Serif CJK SC","Songti SC",Georgia,serif;
+    font-size:clamp(26px,4.4vw,38px);line-height:1.25;margin:0 0 12px;font-weight:600;letter-spacing:.06em;
+  }
+  .lede{margin:0;color:var(--ink-2);font-size:14.5px;line-height:1.7;max-width:62ch}
+
+  .board{display:grid;grid-template-columns:1.55fr .95fr;gap:26px;align-items:stretch}
+  .stage{
+    position:relative;background:linear-gradient(178deg,#FCFAF6 0%,#F2EADB 100%);
+    border:1px solid var(--rule);border-radius:0;overflow:hidden;
+    min-height:540px;
+  }
+  #view{position:absolute;inset:0}
+  #view canvas{display:block;width:100%;height:100%}
+  .hint{
+    position:absolute;left:14px;bottom:14px;font-size:12px;color:#7C6D5C;
+    background:rgba(250,246,236,.86);border:1px solid var(--rule);border-radius:2px;
+    padding:5px 9px;letter-spacing:.06em;pointer-events:none;
+  }
+  .stageTag{
+    position:absolute;left:14px;top:14px;font-size:11.5px;letter-spacing:.18em;
+    color:#A38F76;pointer-events:none;
+  }
+
+  .panel{display:flex;flex-direction:column;gap:18px}
+  .panel h2{
+    font-family:"Noto Serif CJK SC","Songti SC",Georgia,serif;
+    font-size:15px;font-weight:600;letter-spacing:.16em;margin:0 0 10px;
+    padding-bottom:7px;border-bottom:1px solid var(--rule);color:var(--accent);
+  }
+  ul{list-style:none;margin:0;padding:0}
+  .wuyun li{display:flex;align-items:center;gap:11px;padding:7px 0}
+  .dot{
+    width:22px;height:22px;border-radius:50%;flex:0 0 22px;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.10), 0 1px 0 rgba(255,255,255,.6);
+  }
+  .dot.hollow{background:transparent;box-shadow:none;border:1.5px dashed #9aa9c9}
+  .dot.ink{background:#2b2925;border-radius:50%}
+  .nm{font-family:"Noto Serif CJK SC","Songti SC",serif;font-size:17px;font-weight:700;min-width:1.2em}
+  .dsc{font-size:14px;color:var(--ink-2);line-height:1.55}
+
+  .controls{display:flex;flex-wrap:wrap;gap:8px}
+  button{
+    font:inherit;font-size:13px;color:#25211D;background:#FCFAF6;
+    border:1px solid #DCD5C8;border-radius:2px;padding:8px 12px;cursor:pointer;
+    transition:background .18s,border-color .18s,color .18s;
+  }
+  button:hover{background:#FFFDF7;border-color:#B99A78}
+  button:focus-visible{outline:2px solid #994433;outline-offset:2px}
+  button[aria-pressed="true"]{background:#994433;border-color:#994433;color:#FBF3E6}
+
+  footer{margin-top:24px;border-top:1px solid var(--rule);padding-top:14px;font-size:13px;line-height:1.85;color:#7C6D5C}
+
+  @media (max-width:900px){
+    .shell{padding:24px 18px 26px}
+    h1{font-size:26px}
+    .board{grid-template-columns:1fr;gap:20px}
+    .stage{min-height:420px}
+  }
+</style>
+</head>
+<body>
+<main class="shell">
+  <header>
+  <div class="navline"><a href="./index.html">模型入口</a><span class="sep">·</span><a href="../book.html">全书一页</a><span class="sep">·</span><a href="../index.html">心经通释</a></div>
+    <div class="eyebrow">三才五蕴 · 可旋转</div>
+    <h1>五蕴杯器</h1>
+    <p class="lede">色为杯底，受想行识为四瓣竖壁，同一圈杯壁周向切四刀、竖切通体。杯体上不写字，五蕴用颜色分辨：转动杯子，看四瓣围成的那只杯。</p>
+  </header>
+
+  <div class="board">
+    <section class="stage" aria-label="五蕴杯器三维模型">
+      <div id="view"></div>
+      <div class="stageTag">五蕴杯器</div>
+      <div class="hint">拖动旋转 · 滚轮缩放</div>
+    </section>
+
+    <aside class="panel">
+      <div>
+        <h2>五蕴（五种颜色）</h2>
+        <ul class="wuyun">
+          <li><span class="dot" style="background:var(--se)"></span><span class="nm">色</span><span class="dsc">杯底，质料所依，属地</span></li>
+          <li><span class="dot" style="background:var(--shou)"></span><span class="nm">受</span><span class="dsc">感应，一瓣竖壁，属人</span></li>
+          <li><span class="dot" style="background:var(--xiang)"></span><span class="nm">想</span><span class="dsc">取相，一瓣竖壁，属人</span></li>
+          <li><span class="dot" style="background:var(--xing)"></span><span class="nm">行</span><span class="dsc">造作，一瓣竖壁，属人</span></li>
+          <li><span class="dot" style="background:var(--shi)"></span><span class="nm">识</span><span class="dsc">觉照，一瓣竖壁，属天</span></li>
+        </ul>
+        <p class="dsc" style="margin:8px 0 0;color:#8a8172">四瓣顺时针依次为 受 · 想 · 行 · 识，转一周回到 受。</p>
+      </div>
+
+      <div>
+        <h2>不是五蕴</h2>
+        <ul class="wuyun">
+          <li><span class="dot hollow"></span><span class="nm">空</span><span class="dsc">四瓣围出的内空，五蕴涌现处</span></li>
+          <li><span class="dot ink"></span><span class="nm">自性</span><span class="dsc">太极，统摄三才，不在底、壁、内外空</span></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>查看</h2>
+        <div class="controls">
+          <button id="btnRotate" aria-pressed="false">自动旋转</button>
+          <button id="btnSpace" aria-pressed="true">杯外之空</button>
+          <button id="btnTaiji" aria-pressed="true">自性·太极</button>
+          <button id="btnReset">复位视角</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    几何示意，非工程制图：四瓣每瓣 90°、竖切通体，底缺或壁缺即不成器。色为底，故图中杯底一色、四壁四色。
+  </footer>
+</main>
+
+<script>/*__THREE__*/</script>
+<script>/*__ORBIT__*/</script>
+<script>
+(function(){
+  var host = document.getElementById('view');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var COL = {se:0xb78a55, shou:0xcf8d86, xiang:0xdfc06b, xing:0x93b79b, shi:0x8ea8cc};
+  var H = 3.65, RT = 1.5, RB = 0.98, BASE = 0.16, GAP = 0.02;
+  var PETALS = [COL.shou, COL.xiang, COL.xing, COL.shi];
+
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(33, 1, 0.1, 100);
+  camera.position.set(0, 6.5, 11.6);
+
+  var renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.0;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  host.appendChild(renderer.domElement);
+
+  /* 灯光：主光定形体，天空补光抬暗部，背侧轮廓光把杯子从纸底上剥出来 */
+  var hemi = new THREE.HemisphereLight(0xfff6e8, 0x8d7d66, 0.34);
+  scene.add(hemi);
+
+  var key = new THREE.DirectionalLight(0xfff1da, 1.05);
+  key.position.set(4.2, 7.5, 4.4);
+  key.castShadow = true;
+  key.shadow.mapSize.set(1024, 1024);
+  key.shadow.camera.near = 1;
+  key.shadow.camera.far = 22;
+  key.shadow.camera.left = -5; key.shadow.camera.right = 5;
+  key.shadow.camera.top = 5; key.shadow.camera.bottom = -5;
+  key.shadow.bias = -0.0012;
+  key.shadow.radius = 4;
+  scene.add(key);
+
+  var fill = new THREE.DirectionalLight(0xdce7f2, 0.38);
+  fill.position.set(-5, 3.4, -3.6);
+  scene.add(fill);
+
+  var rim = new THREE.DirectionalLight(0xffffff, 0.42);
+  rim.position.set(-1.6, 2.2, -7);
+  scene.add(rim);
+
+  var cup = new THREE.Group();
+  cup.rotation.y = -Math.PI / 4;
+  scene.add(cup);
+
+  function srgb(hex){ return new THREE.Color(hex).convertSRGBToLinear(); }
+  function shade(hex, f){
+    var c = srgb(hex);
+    c.lerp(new THREE.Color(0xffffff), f);
+    return c;
+  }
+
+  /* 四瓣竖壁：同一圈周向切四刀，每瓣 90°，沿高竖切 */
+  for (var i = 0; i < 4; i++){
+    var t0 = i * Math.PI / 2 + GAP / 2;
+    var tl = Math.PI / 2 - GAP;
+    var outer = new THREE.Mesh(
+      new THREE.CylinderGeometry(RT, RB, H, 30, 1, true, t0, tl),
+      new THREE.MeshStandardMaterial({color:srgb(PETALS[i]), roughness:0.56, metalness:0.0, side:THREE.DoubleSide})
+    );
+    outer.position.y = BASE + H / 2;
+    outer.castShadow = true; outer.receiveShadow = true;
+    cup.add(outer);
+
+    var inner = new THREE.Mesh(
+      new THREE.CylinderGeometry(RT - 0.062, RB - 0.05, H, 30, 1, true, t0, tl),
+      new THREE.MeshStandardMaterial({color:shade(PETALS[i], 0.06), roughness:0.74, metalness:0.0, side:THREE.DoubleSide})
+    );
+    inner.position.y = BASE + H / 2;
+    inner.receiveShadow = true;
+    cup.add(inner);
+  }
+
+  /* 杯底：色 */
+  var base = new THREE.Mesh(
+    new THREE.CylinderGeometry(RB * 1.0, RB * 1.03, BASE, 64, 1),
+    new THREE.MeshStandardMaterial({color:srgb(COL.se), roughness:0.66, metalness:0.0})
+  );
+  base.position.y = BASE / 2;
+  base.castShadow = true; base.receiveShadow = true;
+  cup.add(base);
+
+  /* 口沿：一圈陶唇，收住四瓣的接缝 */
+  var lipPts = [
+    new THREE.Vector2(RT - 0.075, 0),
+    new THREE.Vector2(RT + 0.065, 0.028),
+    new THREE.Vector2(RT + 0.065, -0.12),
+    new THREE.Vector2(RT - 0.075, -0.15)
+  ];
+  var lip = new THREE.Mesh(
+    new THREE.LatheGeometry(lipPts, 96),
+    new THREE.MeshStandardMaterial({color:srgb(0x9a8a70), roughness:0.6, metalness:0.0, side:THREE.DoubleSide})
+  );
+  lip.position.y = BASE + H;
+  lip.castShadow = true;
+  cup.add(lip);
+
+  /* 接触阴影承接面：只显影，不铺灰 */
+  var catcherMat = (typeof THREE.ShaderMaterial === 'function' && THREE.ShadowMaterial)
+    ? new THREE.ShadowMaterial({color:0x2b2015, opacity:0.14})
+    : new THREE.MeshBasicMaterial({transparent:true, opacity:0});
+  var catcher = new THREE.Mesh(new THREE.PlaneGeometry(16, 16), catcherMat);
+  catcher.rotation.x = -Math.PI / 2;
+  catcher.receiveShadow = true;
+  catcher.position.y = 0.001;
+  scene.add(catcher);
+
+  /* 杯外之空：虚线立方 */
+  var spaceBox = new THREE.LineSegments(
+    new THREE.EdgesGeometry(new THREE.BoxGeometry(RT * 2.5, H + 1.0, RT * 2.5)),
+    new THREE.LineDashedMaterial({color:0xa8987c, dashSize:0.09, gapSize:0.07, transparent:true, opacity:0.85})
+  );
+  spaceBox.position.y = (BASE + H) / 2;
+  spaceBox.computeLineDistances();
+  scene.add(spaceBox);
+
+  /* 自性·太极：悬在杯上方的圆相 */
+  function yinYangTexture(){
+    var c = document.createElement('canvas'); c.width = c.height = 256;
+    var g = c.getContext('2d');
+    g.clearRect(0,0,256,256);
+    g.fillStyle = '#faf6ec'; g.beginPath(); g.arc(128,128,118,0,Math.PI*2); g.fill();
+    g.fillStyle = '#2b2925'; g.beginPath(); g.arc(128,128,118,-Math.PI/2,Math.PI/2); g.fill();
+    g.fillStyle = '#2b2925'; g.beginPath(); g.arc(128,66,62,0,Math.PI*2); g.fill();
+    g.fillStyle = '#faf6ec'; g.beginPath(); g.arc(128,190,62,0,Math.PI*2); g.fill();
+    g.fillStyle = '#faf6ec'; g.beginPath(); g.arc(128,66,20,0,Math.PI*2); g.fill();
+    g.fillStyle = '#2b2925'; g.beginPath(); g.arc(128,190,20,0,Math.PI*2); g.fill();
+    g.strokeStyle = '#2b2925'; g.lineWidth = 3; g.beginPath(); g.arc(128,128,118,0,Math.PI*2); g.stroke();
+    var t = new THREE.CanvasTexture(c);
+    t.anisotropy = 4;
+    t.generateMipmaps = false;
+    t.minFilter = THREE.LinearFilter;
+    return t;
+  }
+  var taiji = new THREE.Sprite(new THREE.SpriteMaterial({map:yinYangTexture(), transparent:true, depthWrite:false}));
+  taiji.scale.set(0.72, 0.72, 1);
+  taiji.position.set(0, BASE + H + 1.02, 0);
+  scene.add(taiji);
+
+  var tie = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(0, BASE + H + 0.62, 0),
+      new THREE.Vector3(0, BASE + H + 0.16, 0)
+    ]),
+    new THREE.LineDashedMaterial({color:0x8d8170, dashSize:0.07, gapSize:0.06, transparent:true, opacity:0.9})
+  );
+  tie.computeLineDistances();
+  scene.add(tie);
+
+  /* 控制：允许转，但限位，任何角度都是成立的构图 */
+  var controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.target.set(0, 1.7, 0);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.07;
+  controls.enablePan = false;
+  controls.minDistance = 8.0;
+  controls.maxDistance = 18.0;
+  controls.minPolarAngle = 0.16;
+  controls.maxPolarAngle = 1.40;
+  controls.autoRotateSpeed = 0.55;
+  controls.update();
+
+  var state = {rotate:false, space:true, taiji:true};
+
+  function bindToggle(id, keyName, apply){
+    var btn = document.getElementById(id);
+    function sync(){ btn.setAttribute('aria-pressed', String(state[keyName])); apply(state[keyName]); }
+    btn.addEventListener('click', function(){ state[keyName] = !state[keyName]; sync(); });
+    sync();
+  }
+  bindToggle('btnSpace','space', function(v){ spaceBox.visible = v; });
+  bindToggle('btnTaiji','taiji', function(v){ taiji.visible = v; tie.visible = v; });
+  bindToggle('btnRotate','rotate', function(v){
+    controls.autoRotate = v && !reduced;
+  });
+
+  document.getElementById('btnReset').addEventListener('click', function(){
+    camera.position.set(0, 6.5, 11.6);
+    controls.target.set(0, 1.7, 0);
+    controls.update();
+  });
+
+  /* 首屏一次落定：轻微摆正，告诉人可以转 */
+  var intro = {t: reduced ? 1 : 0, last: 0};
+  function easeOut(u){ return 1 - Math.pow(1 - u, 3); }
+
+  var clock = new THREE.Clock();
+  var ready = false;
+  var running = true;
+
+  function resize(){
+    var w = host.clientWidth, h = host.clientHeight;
+    if (!w || !h) return;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h, false);
+  }
+  window.addEventListener('resize', resize);
+
+  function tick(){
+    if (!running) return;
+    requestAnimationFrame(tick);
+    var dt = clock.getDelta();
+
+    if (intro.t < 1){
+      intro.t = Math.min(1, intro.t + dt / 1000 * 1.4);
+      var off = -(1 - easeOut(intro.t)) * 0.5 - intro.last;
+      intro.last += off;
+      var dx = camera.position.x - controls.target.x;
+      var dz = camera.position.z - controls.target.z;
+      var a = Math.atan2(dx, dz) + off;
+      var r = Math.hypot(dx, dz);
+      camera.position.x = controls.target.x + Math.sin(a) * r;
+      camera.position.z = controls.target.z + Math.cos(a) * r;
+    }
+
+    controls.update();
+    renderer.render(scene, camera);
+    if (!ready){ ready = true; window.__sceneReady = true; }
+  }
+
+  document.addEventListener('visibilitychange', function(){
+    if (document.hidden){ running = false; }
+    else if (!running){ running = true; clock.getDelta(); requestAnimationFrame(tick); }
+  });
+
+  resize();
+  renderer.render(scene, camera);
+  if (!ready){ ready = true; window.__sceneReady = true; }
+  tick();
+})();
+</script>
+</body>
+</html>
