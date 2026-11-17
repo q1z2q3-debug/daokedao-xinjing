@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>五蕴管壁 · 三维</title>
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23faf6ec'/><circle cx='16' cy='16' r='9' fill='none' stroke='%232b2925' stroke-width='1.6'/><circle cx='16' cy='16' r='4.2' fill='none' stroke='%232b2925' stroke-width='1.3'/></svg>">
+<style>
+  :root{
+    --paper:#F7F4EE;
+    --paper-2:#FCFAF6;
+    --ink:#25211D;
+    --ink-2:#3B352F;
+    --rule:#DCD5C8;
+    --se:#2f4a6d;
+    --shou:#5fa382;
+    --xiang:#c2542a;
+    --xing:#b98a95;
+    --shi:#7fa3c4;
+    --accent:#994433;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .navline{font-size:12.5px;letter-spacing:.12em;color:#7C6D5C;margin:0 0 16px}
+  .navline a{color:#994433;text-decoration:none;border-bottom:1px solid rgba(153,68,51,.35);padding-bottom:1px}
+  .navline .sep{margin:0 9px;color:#C4B7A2}
+  .shell{max-width:1180px;margin:0 auto;padding:34px 28px 30px}
+  header{border-bottom:1px solid var(--rule);padding-bottom:18px;margin-bottom:22px}
+  .eyebrow{
+    display:inline-block;font-size:12px;letter-spacing:.22em;color:var(--accent);
+    border:1px solid #D8C6AE;border-radius:2px;padding:3px 8px;margin-bottom:12px;
+  }
+  h1{
+    font-family:"Noto Serif CJK SC","Songti SC",Georgia,serif;
+    font-size:clamp(26px,4.4vw,38px);line-height:1.25;margin:0 0 12px;font-weight:600;letter-spacing:.06em;
+  }
+  .lede{margin:0;color:var(--ink-2);font-size:14.5px;line-height:1.7;max-width:64ch}
+
+  .board{display:grid;grid-template-columns:1.55fr .95fr;gap:26px;align-items:start}
+  .stage{
+    position:relative;background:linear-gradient(178deg,#FCFAF6 0%,#F2EADB 100%);
+    border:1px solid var(--rule);border-radius:0;overflow:hidden;min-height:540px;height:min(560px,72vw);
+  }
+  #view{position:absolute;inset:0}
+  #view canvas{display:block;width:100%;height:100%}
+  .hint{
+    position:absolute;left:14px;bottom:14px;font-size:12px;color:#7C6D5C;
+    background:rgba(250,246,236,.86);border:1px solid var(--rule);border-radius:2px;
+    padding:5px 9px;letter-spacing:.06em;pointer-events:none;
+  }
+  .stageTag{
+    position:absolute;left:14px;top:14px;font-size:11.5px;letter-spacing:.18em;
+    color:#A38F76;pointer-events:none;
+  }
+
+  .panel{display:flex;flex-direction:column;gap:18px}
+  .panel h2{
+    font-family:"Noto Serif CJK SC","Songti SC",Georgia,serif;
+    font-size:15px;font-weight:600;letter-spacing:.16em;margin:0 0 10px;
+    padding-bottom:7px;border-bottom:1px solid var(--rule);color:var(--accent);
+  }
+  ul{list-style:none;margin:0;padding:0}
+  .wuyun li{display:flex;align-items:center;gap:11px;padding:7px 0}
+  .dot{
+    width:22px;height:22px;border-radius:50%;flex:0 0 22px;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.10), 0 1px 0 rgba(255,255,255,.6);
+  }
+  .dot.hollow{background:transparent;box-shadow:none;border:1.5px dashed #9aa9c9}
+  .nm{font-family:"Noto Serif CJK SC","Songti SC",serif;font-size:17px;font-weight:700;min-width:1.2em}
+  .dsc{font-size:14px;color:var(--ink-2);line-height:1.55}
+
+  /* 壁厚调控 */
+  .gauge{display:flex;align-items:baseline;gap:8px;margin:2px 0 6px}
+  .gauge b{
+    font-family:"Noto Serif CJK SC","Songti SC",serif;font-size:22px;font-weight:700;letter-spacing:.02em;
+  }
+  .gauge span{font-size:12.5px;color:var(--ink-2);letter-spacing:.06em}
+  .gauge .sep{color:#b9ab92;margin:0 2px}
+  input[type=range]{
+    -webkit-appearance:none;appearance:none;width:100%;height:26px;background:transparent;margin:0;
+  }
+  input[type=range]::-webkit-slider-runnable-track{
+    height:6px;border-radius:3px;
+    background:linear-gradient(90deg,#2f4a6d 0%,#5fa382 25%,#c2542a 50%,#b98a95 75%,#7fa3c4 100%);
+    opacity:.85;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;width:20px;height:20px;border-radius:50%;margin-top:-7px;
+    background:#fdfaf2;border:1px solid #8a6d3b;box-shadow:0 1px 2px rgba(0,0,0,.16);cursor:pointer;
+  }
+  input[type=range]::-moz-range-track{
+    height:6px;border-radius:3px;
+    background:linear-gradient(90deg,#2f4a6d 0%,#5fa382 25%,#c2542a 50%,#b98a95 75%,#7fa3c4 100%);
+    opacity:.85;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:20px;height:20px;border-radius:50%;background:#fdfaf2;border:1px solid #8a6d3b;cursor:pointer;
+  }
+  .state{
+    margin:8px 0 0;font-size:14px;line-height:1.6;color:var(--ink-2);
+    display:flex;align-items:center;gap:7px;
+  }
+  .state::before{
+    content:"";width:7px;height:7px;border-radius:50%;background:#5fa382;flex:0 0 7px;
+  }
+  .state.dry{color:#9c3b21}
+  .state.dry::before{background:#c2542a}
+
+  .controls{display:flex;flex-wrap:wrap;gap:8px}
+  button{
+    font:inherit;font-size:13px;color:#25211D;background:#FCFAF6;
+    border:1px solid #DCD5C8;border-radius:2px;padding:8px 12px;cursor:pointer;
+    transition:background .18s,border-color .18s,color .18s;
+  }
+  button:hover{background:#FFFDF7;border-color:#B99A78}
+  button:focus-visible{outline:2px solid #994433;outline-offset:2px}
+  button[aria-pressed="true"]{background:#994433;border-color:#994433;color:#FBF3E6}
+
+  footer{margin-top:24px;border-top:1px solid var(--rule);padding-top:14px;font-size:13px;line-height:1.85;color:#7C6D5C}
+
+  @media (max-width:900px){
+    .shell{padding:24px 18px 26px}
+    h1{font-size:26px}
+    .board{grid-template-columns:1fr;gap:20px}
+    .stage{min-height:400px;height:400px}
+    .gauge b{font-size:20px}
+    #presets{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+  }
+</style>
+</head>
+<body>
+<main class="shell">
+  <header>
+  <div class="navline"><a href="./index.html">模型入口</a><span class="sep">·</span><a href="../book.html">全书一页</a><span class="sep">·</span><a href="../index.html">心经通释</a></div>
+    <div class="eyebrow">三才五蕴 · 可调壁厚</div>
+    <h1>五蕴管壁</h1>
+    <p class="lede">色受想行识为五瓣纵壁，每瓣七十二度、沿管长通体；管横放，没有单独的底，色也是一瓣。壁上不写字，五蕴用颜色分辨：调壁厚，看壁渐厚、空渐小，到实心则空尽而不通。</p>
+  </header>
+
+  <div class="board">
+    <section class="stage" aria-label="五蕴管壁三维模型">
+      <div id="view"></div>
+      <div class="stageTag">五蕴管壁</div>
+      <div class="hint">拖动旋转 · 滚轮缩放</div>
+    </section>
+
+    <aside class="panel">
+      <div>
+        <h2>壁厚</h2>
+        <div class="gauge">
+          <b><span id="wallPct">35</span>%</b>
+          <span>壁</span><span class="sep">·</span>
+          <span>空 <span id="voidPct">65</span>%</span>
+        </div>
+        <input id="wall" type="range" min="12" max="100" step="1" value="35" aria-label="管壁厚度，占外半径的比例">
+        <div class="controls" id="presets" style="margin-top:12px">
+          <button data-frac="15">薄壁 15%</button>
+          <button data-frac="35">中壁 35%</button>
+          <button data-frac="57">厚壁 57%</button>
+          <button data-frac="100">实心 100%</button>
+        </div>
+        <p class="state" id="state">五瓣壁完整、空未绝：仍是可通的管。</p>
+      </div>
+
+      <div>
+        <h2>五蕴（五种颜色）</h2>
+        <ul class="wuyun">
+          <li><span class="dot" style="background:var(--se)"></span><span class="nm">色</span><span class="dsc">壁之一瓣，质料所依，属地</span></li>
+          <li><span class="dot" style="background:var(--shou)"></span><span class="nm">受</span><span class="dsc">感应，一瓣纵壁，属人</span></li>
+          <li><span class="dot" style="background:var(--xiang)"></span><span class="nm">想</span><span class="dsc">取相，一瓣纵壁，属人</span></li>
+          <li><span class="dot" style="background:var(--xing)"></span><span class="nm">行</span><span class="dsc">造作，一瓣纵壁，属人</span></li>
+          <li><span class="dot" style="background:var(--shi)"></span><span class="nm">识</span><span class="dsc">觉照，一瓣纵壁，属天</span></li>
+        </ul>
+        <p class="dsc" style="margin:8px 0 0;color:#8a8172;font-size:14px">五瓣各七十二度，转一周依次经过五个颜色；瓣序不变，只是视角在换。</p>
+      </div>
+
+      <div>
+        <h2>不是五蕴</h2>
+        <ul class="wuyun">
+          <li><span class="dot hollow"></span><span class="nm">空</span><span class="dsc">五瓣围出的管腔，为通；壁厚则空小，实心则空绝</span></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>查看</h2>
+        <div class="controls">
+          <button id="spin" aria-pressed="false">自动旋转</button>
+          <button id="reset">复位视角</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    几何示意，非工程制图：管壁五瓣各七十二度、沿管长通体；不是同心五层，也不是沿长度切五段。壁厚按外半径的比例显示，与真实尺寸无关。
+  </footer>
+</main>
+
+<script>
+/*__THREE__*/
+</script>
+<script>
+/*__ORBIT__*/
+</script>
+<script>
+(function(){
+  'use strict';
+  var host = document.getElementById('view');
+  if (!host || typeof THREE === 'undefined') { return; }
+
+  /* ---------- 常量 ---------- */
+  var R = 1.15;            /* 外半径 */
+  var L = 4.6;             /* 管长 */
+  var GAP = 0.006;         /* 瓣与瓣之间的细缝（弧度） */
+  var GROUND = -R;         /* 地面 */
+  var COL = ['#2f4a6d', '#5fa382', '#c2542a', '#b98a95', '#7fa3c4']; /* 色 受 想 行 识 */
+
+  function srgb(hex){ return new THREE.Color(hex).convertSRGBToLinear(); }
+
+  /* ---------- 渲染器与场景 ---------- */
+  var scene = new THREE.Scene();
+  scene.background = null;
+
+  var camera = new THREE.PerspectiveCamera(33, 1, 0.1, 100);
+  camera.position.set(9.0, 3.9, 6.35);
+
+  var renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.NoToneMapping;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  host.appendChild(renderer.domElement);
+
+  var controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.target.set(0, -0.05, 0);
+  controls.enablePan = false;
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.07;
+  controls.minDistance = 5.0;
+  controls.maxDistance = 15.0;
+  controls.minPolarAngle = 0.22;
+  controls.maxPolarAngle = Math.max(1.5, 0);
+  controls.autoRotateSpeed = 0.7;
+
+  /* ---------- 光照：主光定形体，天光守暗部 ---------- */
+  var key = new THREE.DirectionalLight(0xfff4e6, 0.78);
+  key.position.set(4.2, 6.4, 4.0);
+  key.castShadow = true;
+  key.shadow.mapSize.width = 1024;
+  key.shadow.mapSize.height = 1024;
+  key.shadow.bias = -0.0012;
+  key.shadow.radius = 4;
+  key.shadow.camera.left = -4.5;
+  key.shadow.camera.right = 4.5;
+  key.shadow.camera.top = 4.5;
+  key.shadow.camera.bottom = -4.5;
+  key.shadow.camera.near = 1;
+  key.shadow.camera.far = 26;
+  scene.add(key);
+
+  var hemi = new THREE.HemisphereLight(0xfff6e8, 0x7d6f5a, 0.5);
+  scene.add(hemi);
+
+  var fill = new THREE.DirectionalLight(0xdce7f2, 0.2);
+  fill.position.set(-5.5, 2.2, 3.2);
+  scene.add(fill);
+
+  var rim = new THREE.DirectionalLight(0xffffff, 0.16);
+  rim.position.set(-1.4, 2.4, -6.4);
+  scene.add(rim);
+
+  /* ---------- 接影面 ---------- */
+  var catcherMat = (typeof THREE.ShadowMaterial === 'function')
+    ? new THREE.ShadowMaterial({color:0x2b2015, opacity:0.24})
+    : new THREE.MeshBasicMaterial({transparent:true, opacity:0});
+  var shadowCatcher = new THREE.Mesh(new THREE.PlaneGeometry(22, 22), catcherMat);
+  shadowCatcher.rotation.x = -Math.PI / 2;
+  shadowCatcher.position.y = GROUND - 0.004;
+  shadowCatcher.receiveShadow = true;
+  scene.add(shadowCatcher);
+
+  /* ---------- 管：五瓣纵壁 ---------- */
+  var pipe = new THREE.Group();
+  scene.add(pipe);
+
+  var mats = COL.map(function(hex){
+    return new THREE.MeshStandardMaterial({color:srgb(hex), roughness:0.8, metalness:0.0, side:THREE.DoubleSide});
+  });
+
+  /* 腔内纵深：沿管长渐暗的贴图，近端透明、远端压深 */
+  var boreTex = (function(){
+    var cv = document.createElement('canvas');
+    cv.width = 8; cv.height = 128;
+    var g = cv.getContext('2d');
+    var grad = g.createLinearGradient(0, 0, 0, 128);
+    grad.addColorStop(0, 'rgba(0,0,0,0.62)');
+    grad.addColorStop(0.55, 'rgba(0,0,0,0.34)');
+    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = grad; g.fillRect(0, 0, 8, 128);
+    var t = new THREE.CanvasTexture(cv);
+    t.wrapS = THREE.RepeatWrapping;
+    t.wrapT = THREE.ClampToEdgeWrapping;
+    return t;
+  })();
+
+  var pieces = [];
+
+  function sectorShape(Ro, Ri, a0, aLen, seg){
+    var s = new THREE.Shape();
+    var k, a;
+    s.moveTo(Math.cos(a0) * Ro, Math.sin(a0) * Ro);
+    for (k = 1; k <= seg; k++){
+      a = a0 + aLen * k / seg;
+      s.lineTo(Math.cos(a) * Ro, Math.sin(a) * Ro);
+    }
+    for (k = seg; k >= 0; k--){
+      a = a0 + aLen * k / seg;
+      s.lineTo(Math.cos(a) * Ri, Math.sin(a) * Ri);
+    }
+    s.closePath();
+    return s;
+  }
+
+  function buildWall(frac){
+    var i, geo, mesh;
+    for (i = 0; i < pieces.length; i++){
+      pipe.remove(pieces[i]);
+      pieces[i].geometry.dispose();
+    }
+    pieces = [];
+
+    var t = R * frac;
+    var Ri = Math.max(R - t, 0.0016);
+    var seg = 72;
+    var aLen = Math.PI * 2 / 5 - GAP;
+
+    for (i = 0; i < 5; i++){
+      var a0 = i * Math.PI * 2 / 5 + GAP / 2;
+      geo = new THREE.ExtrudeGeometry(sectorShape(R, Ri, a0, aLen, seg), {
+        depth: L, bevelEnabled: false, steps: 1, curveSegments: seg
+      });
+      geo.translate(0, 0, -L / 2);
+      geo.rotateY(Math.PI / 2);   /* 挤出轴转到 X 轴，管横放 */
+
+      mesh = new THREE.Mesh(geo, mats[i]);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      pipe.add(mesh);
+      pieces.push(mesh);
+    }
+    /* 管腔暗化：只看远端内壁，让“空”有纵深 */
+    if (Ri > 0.05){
+      var boreGeo = new THREE.CylinderGeometry(1, 1, L - 0.03, 48, 1, true);
+      var bore = new THREE.Mesh(boreGeo, new THREE.MeshBasicMaterial({
+        map:boreTex, transparent:true, opacity:1, side:THREE.BackSide, depthWrite:false, color:0x000000
+      }));
+      bore.rotation.z = -Math.PI / 2;
+      bore.scale.set(Ri - 0.006, 1, Ri - 0.006);
+      pipe.add(bore);
+      pieces.push(bore);
+    }
+    return Ri;
+  }
+
+  /* ---------- 交互 ---------- */
+  var wall = document.getElementById('wall');
+  var wallPct = document.getElementById('wallPct');
+  var voidPct = document.getElementById('voidPct');
+  var state = document.getElementById('state');
+  var current = 35;
+
+  function applyFrac(frac, syncInput){
+    frac = Math.max(12, Math.min(100, Math.round(frac)));
+    current = frac;
+    buildWall(frac / 100);
+    if (presetBox){
+      for (var bi = 0; bi < presetBox.children.length; bi++){
+        var b = presetBox.children[bi];
+        b.setAttribute('aria-pressed', String(parseInt(b.dataset.frac, 10) === frac));
+      }
+    }
+    if (wallPct) wallPct.textContent = String(frac);
+    if (voidPct) voidPct.textContent = String(100 - frac);
+    if (syncInput && wall && String(wall.value) !== String(frac)) wall.value = String(frac);
+    if (state){
+      if (frac >= 100){
+        state.textContent = '空尽：不通，已不成管。';
+        state.className = 'state dry';
+      } else if (frac >= 85){
+        state.textContent = '壁近实，空将绝：尚通，而通已难。';
+        state.className = 'state';
+      } else {
+        state.textContent = '五瓣壁完整、空未绝：仍是可通的管。';
+        state.className = 'state';
+      }
+    }
+    render();
+  }
+
+  if (wall){
+    wall.addEventListener('input', function(){ applyFrac(parseFloat(wall.value), false); });
+  }
+
+  var presetBox = document.getElementById('presets');
+  if (presetBox){
+    presetBox.addEventListener('click', function(e){
+      var btn = e.target.closest ? e.target.closest('button') : null;
+      if (!btn || !btn.dataset) return;
+      var f = parseInt(btn.dataset.frac, 10);
+      if (!isFinite(f)) return;
+      applyFrac(f, true);
+    });
+  }
+
+  var spinBtn = document.getElementById('spin');
+  var spinning = false;
+  function setSpin(on){
+    spinning = on;
+    controls.autoRotate = on;
+    if (spinBtn) spinBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+  }
+  if (spinBtn) spinBtn.addEventListener('click', function(){ setSpin(!spinning); });
+
+  var resetBtn = document.getElementById('reset');
+  if (resetBtn) resetBtn.addEventListener('click', function(){
+    setSpin(false);
+    controls.target.set(0, -0.05, 0);
+    fitView();
+    camera.lookAt(controls.target);
+    controls.update();
+    render();
+  });
+
+  /* ---------- 尺寸与渲染 ---------- */
+  var DIR = new THREE.Vector3(0.79, 0.35, 0.56).normalize();
+  var FIT_R = 2.72;
+
+  function fitDistance(){
+    var vHalf = camera.fov * Math.PI / 360;
+    var hHalf = Math.atan(Math.tan(vHalf) * (camera.aspect || 1));
+    return FIT_R / Math.sin(Math.min(vHalf, hHalf));
+  }
+
+  function fitView(){
+    var d = fitDistance();
+    camera.position.copy(DIR).multiplyScalar(d).add(controls.target);
+    camera.lookAt(controls.target);
+    controls.update();
+  }
+
+  function resize(){
+    var w = host.clientWidth || 1;
+    var h = host.clientHeight || 1;
+    var prev = camera.aspect;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h, false);
+    if (prev && Math.abs((camera.aspect / prev) - 1) > 0.16) fitView();
+    render();
+  }
+
+  var frame = null;
+  function loop(){
+    frame = requestAnimationFrame(loop);
+    if (document.hidden) return;
+    controls.update();
+    renderer.render(scene, camera);
+  }
+
+  function render(){ renderer.render(scene, camera); }
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  controls.target.set(0, -0.05, 0);
+  applyFrac(35, true);
+  resize();
+  fitView();
+  render();
+  window.addEventListener('resize', resize);
+  if (document.addEventListener){
+    document.addEventListener('visibilitychange', function(){
+      if (document.hidden){
+        if (frame) cancelAnimationFrame(frame);
+        frame = null;
+      } else if (!frame){
+        loop();
+      }
+    });
+  }
+  if (!reduce){
+    loop();
+  } else {
+    render();
+  }
+  window.__sceneReady = true;
+  window.__setWall = function(frac){ applyFrac(frac, true); };
+})();
+</script>
+</body>
+</html>

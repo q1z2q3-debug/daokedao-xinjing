@@ -5,6 +5,7 @@
 ## 产物
 - /book.html 阅读版（单文件自包含，1.4 MB）
 - /english/ 英文稿十篇索引（分释十一节合为十篇，canonical 指 book.html#分释篇N）
+- /models/ 五蕴模型（三维）：五蕴杯器、五蕴管壁两只可旋转单文件模型
 - /downloads/道可道-心经通释-1.0.0.apk 安卓离线包（2.4 MB）
 - https://github.com/q1z2q3-debug/daokedao-xinjing Markdown 母本与图版
 
