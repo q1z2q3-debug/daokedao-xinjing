@@ -32,6 +32,7 @@
 | [`apk/`](apk/) | APK 构建链：资源准备、aapt2/javac/d8/apksigner 六步 | — |
 | [`figures/`](figures/) | 封面、扉页、封套源文件与成图 | — |
 | [`docs/models/`](docs/models/) | **五蕴模型（三维）**。杯器与管壁，可旋转、可调壁厚，单文件离线可开 | 各 630 KB |
+| [`skill/sancai-wuyun-3d/`](skill/sancai-wuyun-3d/) | **可复用插件**。模板＋构建脚本＋几何契约，`scripts/build.py` 可复现两只模型 | 670 KB |
 
 ## 三、在线读
 
