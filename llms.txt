@@ -1,0 +1,18 @@
+# 润泽说 道可道之心经通释
+
+《般若波罗蜜多心经》二百六十字通释。全书 73,907 字，三十六节。
+
+## 产物
+- /book.html 阅读版（单文件自包含，1.8 MB）
+- /wuyun-pipe.html 五蕴管壁自照（二十题、五档，单文件自包含，670 KB）
+- /english/ 英文稿十篇索引（分释十一节合为十篇，canonical 指 book.html#分释篇N）
+- /models/ 五蕴模型（三维）：五蕴杯器、五蕴管壁两只可旋转单文件模型
+- /downloads/道可道-心经通释-1.0.0.apk 安卓离线包（2.4 MB）
+- https://github.com/q1z2q3-debug/daokedao-xinjing Markdown 母本与图版
+
+## 方法
+以「佛说A—即非A—是名A」为标尺，字源溯源、古义勘正、逐句拆解、跨典互证；兼通老庄与易传。
+底层模型：三才五蕴太极空杯；五蕴管壁。杯以容，管以通。
+
+## 系列
+- 系列总站（《道德经》《易传》《心经》统一入口）：https://q1z2q3-debug.github.io/runze-daokedao/
