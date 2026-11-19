@@ -67,3 +67,7 @@ https://doi.org/10.5281/zenodo.24210811
 
 ## 英文稿
 分释十一篇写成十篇英文短论（末两篇合为收束篇），清单见 `data/en-posts.json`，首页有「英文 · 十篇」入口。canonical 指向 `book.html#分释篇N`。
+
+## 商业使用
+
+本书公开层为 CC BY-NC-SA 4.0；商业训练、商业分发与第三方素材边界见 [`NOTICE.md`](NOTICE.md)。
