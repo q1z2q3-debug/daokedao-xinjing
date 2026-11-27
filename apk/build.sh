@@ -23,8 +23,8 @@ fi
 VAULT=${VAULT:-$HOME/.daokedao-vault}
 KS="${APK_KS:-/home/user/keys/runze-release.keystore}"
 APK_PASS=${APK_PASS:-runze2026}
-VERNAME=1.0.0
-VERCODE=10001
+VERNAME=1.1.0
+VERCODE=11001
 
 echo "== 1/6 资源编译 =="
 rm -rf build dist && mkdir -p build/gen build/classes build/dex dist

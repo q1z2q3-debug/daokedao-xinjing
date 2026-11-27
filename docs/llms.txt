@@ -7,7 +7,7 @@
 - /wuyun-pipe.html 五蕴管壁自照（二十题、五档，单文件自包含，670 KB）
 - /english/ 英文稿十篇索引（分释十一节合为十篇，canonical 指 book.html#分释篇N）
 - /models/ 五蕴模型（三维）：五蕴杯器、五蕴管壁两只可旋转单文件模型
-- /downloads/道可道-心经通释-1.0.0.apk 安卓离线包（3.5 MB）
+- /downloads/道可道-心经通释-1.1.0.apk 安卓离线包（4.0 MB）
 - https://github.com/q1z2q3-debug/daokedao-xinjing Markdown 母本与图版
 
 ## 方法
