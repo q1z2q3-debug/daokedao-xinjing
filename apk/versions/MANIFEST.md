@@ -4,12 +4,14 @@
 
 | 版本 | 版本码 | 体积 | 签名 | 文件 |
 |---|---|---|---|---|
-| 1.1.0 | 11001 | 4.0 MB | ab46bead | `xinjing-v1.1.0-vc11001-runze-release-3a515e3f.apk` |
+| 1.1.0（误标 1.0.0） | 10001 | 3.8 MB | ab46bead | `xinjing-v1.1.0-vc11001-runze-release-3a515e3f-误标vc10001.apk` |
+| 1.1.0 | 11001 | 3.8 MB | ab46bead | `xinjing-v1.1.0-vc11001-runze-release-ce7ae6aa.apk` |
 | 1.0.0 | 10000 | 2.3 MB | 2bdc2468 | `xinjing-v1.0.0-vc10000-旧-2bdc2468-ea497c08.apk` |
 | 1.0.0 | 10001 | 3.5 MB | ab46bead | `xinjing-v1.0.0-vc10001-runze-release-d8a62279.apk` |
 
 ## SHA-256
 
+- `ce7ae6aafab1c1162e2f533766e09cee4833a19115400095c10904d9470cc5ef`  xinjing-v1.1.0-vc11001-runze-release-ce7ae6aa.apk
 - `3a515e3f7ee8dd023fa96ab2269ed51fc9a0c6a75f1a24e9644b64b908afe5ab`  xinjing-v1.1.0-vc11001-runze-release-3a515e3f.apk
 - `7506d1f54227a438f15a0766ecb0e41ab70ea7e7652529eeafe25b456412cdf0`  xinjing-v1.0.0-vc10000-旧-2bdc2468-ea497c08.apk
 - `40c8e176534157fdc1650a270a35fcb019329fd75c7434f6da89033e7648356e`  xinjing-v1.0.0-vc10001-runze-release-d8a62279.apk
