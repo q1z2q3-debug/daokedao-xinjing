@@ -28,7 +28,7 @@
 | [`book/润泽说-道可道之心经通释（稿）.md`](book/润泽说-道可道之心经通释（稿）.md) | **主本**。Markdown 母本，可印制、可 diff、可再加工 | 205 KB |
 | [`book/心经通释·阅读版.html`](book/心经通释·阅读版.html) | **阅读版**。单文件自包含：封面、扉页、目录、四图内嵌、编注，离线可开 | 1.8 MB |
 | [`book/润泽说 道可道之心经通释.pdf`](book/润泽说%20道可道之心经通释.pdf) | **成书 PDF**。A5，152 页，页眉页码齐，可直接印制 | 5.8 MB |
-| [`packages/apk-1.0.0-xinjing/`](packages/apk-1.0.0-xinjing/) | **安卓离线包**。零权限、断网可用、字体内置 | 2.4 MB |
+| [`packages/apk-1.0.0-xinjing/`](packages/apk-1.0.0-xinjing/) | **安卓离线包**。零权限、断网可用、字体内置 | 3.5 MB |
 | [`apk/`](apk/) | APK 构建链：资源准备、aapt2/javac/d8/apksigner 六步 | — |
 | [`figures/`](figures/) | 封面、扉页、封套源文件与四图成图 | — |
 | [`docs/models/`](docs/models/) | **五蕴模型（三维）**。杯器与管壁，可旋转、可调壁厚，单文件离线可开 | 各 630 KB |
