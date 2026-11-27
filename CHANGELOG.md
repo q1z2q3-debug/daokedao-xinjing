@@ -1,10 +1,11 @@
 # 变更记录
 
-## v1.0.0-r2 · 2026-11-27（换图标）
+## v1.1.0-r2 · 2026-11-27（换图标）
 
 - 安卓包图标换为新版「观自在」（手作图标原样入库，自适应层齐备）；正文未动。
-- versionName 1.0.0 不变，versionCode 10000→10001；`docs/downloads/` 补齐 APK 直链。
+- versionName 1.1.0 不变，versionCode →10001；`docs/downloads/` 补齐 APK 直链。
 - 签名改用统一的 `runze-release` 自签证书（`AB46BEAD…`）；旧包首次安装需先卸载。
+
 ## v1.1.0 · 2026-11-18
 
 **书稿**
